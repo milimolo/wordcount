@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace wordcount
@@ -14,9 +15,9 @@ namespace wordcount
             WordCounter counter = new WordCounter();
             WordDatabase db = new WordDatabase();
 
-            var root = new DirectoryInfo(@"/Users/ole/data/arnold-j");
+            var root = new DirectoryInfo(@"/Users/ole/data/arnold-j/avaya");
 
-            var res = counter.Crawl(root);
+            var res = counter.Crawl(root, new List<string> { ".txt"});
 
           
 
@@ -27,7 +28,9 @@ namespace wordcount
 
             Console.WriteLine("DONE!");
 
-            foreach (var p in db.GetAll())
+            var all = db.GetAll();
+
+            foreach (var p in all)
             {
                 Console.WriteLine("<" + p.Key + ", " + p.Value + ">");
             }

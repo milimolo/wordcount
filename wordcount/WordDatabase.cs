@@ -50,7 +50,7 @@ namespace wordcount
         {
             Dictionary<string, int> res = new Dictionary<string, int>();
 
-            //Read the newly inserted data:
+      
             var selectCmd = _connection.CreateCommand();
             selectCmd.CommandText = "SELECT * FROM word order by count desc";
 

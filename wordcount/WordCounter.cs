@@ -30,16 +30,17 @@ namespace wordcount
             return res;
         }
 
-        public Dictionary<string, int> Crawl(DirectoryInfo dir) {
+        public Dictionary<string, int> Crawl(DirectoryInfo dir, List<string> extensions) {
             Dictionary<string, int> res = new Dictionary<string, int>();
 
             Console.WriteLine("Crawling " + dir.FullName);
 
-            foreach (var file in dir.EnumerateFiles()) 
-                AddDictionary(res, CountFile(file));
+            foreach (var file in dir.EnumerateFiles())
+                if (extensions.Contains(file.Extension))
+                      AddDictionary(res, CountFile(file));
            
             foreach (var d in dir.EnumerateDirectories())
-                AddDictionary(res, Crawl(d));
+                AddDictionary(res, Crawl(d, extensions));
 
             return res;
         }
