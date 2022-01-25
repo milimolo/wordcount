@@ -15,7 +15,9 @@ namespace wordcount
             WordCounter counter = new WordCounter();
             WordDatabase db = new WordDatabase();
 
-            var root = new DirectoryInfo(@"/Users/ole/data/arnold-j/avaya");
+            var root = new DirectoryInfo(@"/Users/ole/data/arnold-j");
+
+            DateTime start = DateTime.Now;
 
             var res = counter.Crawl(root, new List<string> { ".txt"});
 
@@ -26,13 +28,15 @@ namespace wordcount
                 db.Insert(p.Key, p.Value);
             }
 
-            Console.WriteLine("DONE!");
+            TimeSpan used = DateTime.Now - start;
+            Console.WriteLine("DONE! used " + used.TotalMilliseconds);
 
             var all = db.GetAll();
 
             foreach (var p in all)
             {
                 Console.WriteLine("<" + p.Key + ", " + p.Value + ">");
+                break;
             }
 
 

@@ -6,7 +6,7 @@ namespace wordcount
 {
     public class WordCounter
     {
-        private char[] sep = " \n\t\",;.:-_**+=)([]{}/&%€#".ToCharArray();
+        private readonly char[] sep = " \n\t\",?;.:-_**+=)([]{}<>/@&%€#".ToCharArray();
 
         public WordCounter()
         {

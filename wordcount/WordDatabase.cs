@@ -49,7 +49,6 @@ namespace wordcount
         public Dictionary<string, int> GetAll()
         {
             Dictionary<string, int> res = new Dictionary<string, int>();
-
       
             var selectCmd = _connection.CreateCommand();
             selectCmd.CommandText = "SELECT * FROM word order by count desc";
