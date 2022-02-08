@@ -8,13 +8,32 @@ namespace wordcount
     {
         private readonly char[] sep = " \\\n\t\"$'!,?;.:-_**+=)([]{}<>/@&%€#".ToCharArray();
 
-        public WordCounter()
-        {
+        public WordCounter(){}
+
+        
+
+        // Return a dictionary of all the words (the key) in the files contained
+        // in the directory [dir]. Only files with an extension in
+        // [extensions] is read. The value part of the return value is
+        // the number of occurrences of the key.
+        public Dictionary<string, int> CountWords(DirectoryInfo dir, List<string> extensions) {
+            Dictionary<string, int> res = new Dictionary<string, int>();
+
+            Console.WriteLine("Crawling " + dir.FullName);
+
+            foreach (var file in dir.EnumerateFiles())
+                if (extensions.Contains(file.Extension))
+                      AddDictionary(res, CountWordsInFile(file));
+           
+            foreach (var d in dir.EnumerateDirectories())
+                AddDictionary(res, CountWords(d, extensions));
+
+            return res;
         }
 
         //Return a dictionary containing all words (as the key)in the file
         // [f] and the value is the number of occurrences of the key in file.
-        Dictionary<string, int> CountFile(FileInfo f)
+        private Dictionary<string, int> CountWordsInFile(FileInfo f)
         {
             Dictionary<string, int> res = new Dictionary<string, int>();
             var content = File.ReadAllLines(f.FullName);
@@ -28,25 +47,6 @@ namespace wordcount
                         res.Add(aWord, 1);
                 }
             }
-
-            return res;
-        }
-
-        // Return a dictionary of all the words (the key) in the files contained
-        // in the directory [dir]. Only files with an extension in
-        // [extensions] is read. The value part of the return value is
-        // the number of occurrences of the key.
-        public Dictionary<string, int> Crawl(DirectoryInfo dir, List<string> extensions) {
-            Dictionary<string, int> res = new Dictionary<string, int>();
-
-            Console.WriteLine("Crawling " + dir.FullName);
-
-            foreach (var file in dir.EnumerateFiles())
-                if (extensions.Contains(file.Extension))
-                      AddDictionary(res, CountFile(file));
-           
-            foreach (var d in dir.EnumerateDirectories())
-                AddDictionary(res, Crawl(d, extensions));
 
             return res;
         }

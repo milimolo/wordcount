@@ -19,7 +19,7 @@ namespace wordcount
 
             DateTime start = DateTime.Now;
 
-            var res = counter.Crawl(root, new List<string> { ".txt"});
+            var res = counter.CountWords(root, new List<string> { ".txt"});
 
           
 
