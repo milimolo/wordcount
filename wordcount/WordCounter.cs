@@ -12,6 +12,8 @@ namespace wordcount
         {
         }
 
+        //Return a dictionary containing all words (as the key)in the file
+        // [f] and the value is the number of occurrences of the key in file.
         Dictionary<string, int> CountFile(FileInfo f)
         {
             Dictionary<string, int> res = new Dictionary<string, int>();
@@ -30,6 +32,10 @@ namespace wordcount
             return res;
         }
 
+        // Return a dictionary of all the words (the key) in the files contained
+        // in the directory [dir]. Only files with an extension in
+        // [extensions] is read. The value part of the return value is
+        // the number of occurrences of the key.
         public Dictionary<string, int> Crawl(DirectoryInfo dir, List<string> extensions) {
             Dictionary<string, int> res = new Dictionary<string, int>();
 
@@ -45,9 +51,10 @@ namespace wordcount
             return res;
         }
 
-        private void AddDictionary(Dictionary<string, int> res, Dictionary<string, int> cFile)
+        // add [other] to res.
+        private void AddDictionary(Dictionary<string, int> res, Dictionary<string, int> other)
         {
-            foreach (KeyValuePair<String, int> p in cFile)
+            foreach (KeyValuePair<String, int> p in other)
             {
                 if (res.ContainsKey(p.Key))
                     res[p.Key] += p.Value;
