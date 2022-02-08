@@ -20,7 +20,9 @@ namespace wordcount
 
             if (f.Name.StartsWith('.')) return;
 
-            File.Move(f.FullName, f.FullName + ".txt", true);
+            var ending = f.FullName.EndsWith(".") ? "txt" : ".txt";
+
+            File.Move(f.FullName, f.FullName + ending, true);
         }
 
         public void Crawl(DirectoryInfo dir)
