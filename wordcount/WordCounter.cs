@@ -54,7 +54,7 @@ namespace wordcount
         // add [other] to res.
         private void AddDictionary(Dictionary<string, int> res, Dictionary<string, int> other)
         {
-            foreach (KeyValuePair<String, int> p in other)
+            foreach (KeyValuePair<string, int> p in other)
             {
                 if (res.ContainsKey(p.Key))
                     res[p.Key] += p.Value;

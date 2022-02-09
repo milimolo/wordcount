@@ -15,7 +15,7 @@ namespace wordcount
             WordCounter counter = new WordCounter();
             WordDatabase db = new WordDatabase();
 
-            var root = new DirectoryInfo(@"/Users/ole/data");
+            var root = new DirectoryInfo(@"/Users/bonde/data");
 
             DateTime start = DateTime.Now;
 
